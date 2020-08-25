@@ -1,0 +1,18 @@
+﻿@page
+@model OlavWebsite.Pages.CookiesModel
+@{
+    ViewData["Title"] = "Cookies";
+}
+
+<h1>Cookies</h1>
+
+<table class="table">
+    @foreach (var cookie in Model.Cookies)
+    {
+    <tr>
+        <td>@cookie.Name</td>
+        <td>@cookie.Type</td>
+        <td>@cookie.Diameter cm</td>
+    </tr>
+    }
+</table>
