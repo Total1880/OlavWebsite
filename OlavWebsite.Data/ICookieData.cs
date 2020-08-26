@@ -7,12 +7,17 @@ namespace OlavWebsite.Data
 {
     public interface ICookieData
     {
-        IEnumerable<Cookie> GetAllCookies();
+        IEnumerable<Cookie> GetCookiesByName(string name);
+        Cookie GetById(int id);
+        Cookie Update(Cookie updatedCookie);
+        Cookie Add(Cookie newCookie);
+        int Commit();
     }
 
     public class InMemoryCookieData : ICookieData
     {
-        List<Cookie> cookies;
+        readonly List<Cookie> cookies;
+
         public InMemoryCookieData()
         {
             cookies = new List<Cookie>()
@@ -23,11 +28,43 @@ namespace OlavWebsite.Data
             };
         }
 
-        public IEnumerable<Cookie> GetAllCookies()
+        public IEnumerable<Cookie> GetCookiesByName(string name = null)
         {
             return from c in cookies
+                   where string.IsNullOrEmpty(name) || c.Name.StartsWith(name)
                    orderby c.Name
                    select c;
+        }
+
+        public Cookie GetById(int id)
+        {
+            return cookies.SingleOrDefault(c => c.Id == id);
+        }
+
+        public Cookie Update(Cookie updatedCookie)
+        {
+            var cookie = cookies.SingleOrDefault(c => c.Id == updatedCookie.Id);
+
+            if (cookie != null)
+            {
+                cookie.Name = updatedCookie.Name;
+                cookie.Diameter = updatedCookie.Diameter;
+                cookie.Type = updatedCookie.Type;
+            }
+
+            return cookie;
+        }
+
+        public Cookie Add(Cookie newCookie)
+        {
+            cookies.Add(newCookie);
+            newCookie.Id = cookies.Max(c => c.Id) + 1;
+            return newCookie;
+        }
+
+        public int Commit()
+        {
+            return 0;
         }
     }
 }

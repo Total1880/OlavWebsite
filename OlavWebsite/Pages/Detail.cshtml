@@ -1,0 +1,23 @@
+﻿@page "{cookieId:int}"
+@model OlavWebsite.Pages.DetailModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>@Model.Cookie.Name</h1>
+<div>
+    Id: @Model.Cookie.Id
+</div>
+<div>
+    Diameter: @Model.Cookie.Diameter cm
+</div>
+<div>
+    Type: @Model.Cookie.Type
+</div>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<a asp-page="./Cookies" class="btn btn-primary">All cookies</a>

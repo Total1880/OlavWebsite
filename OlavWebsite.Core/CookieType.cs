@@ -2,6 +2,6 @@
 {
     public enum CookieType
     {
-        Cone, Tulips, Wafer, Divers
+        None, Cone, Tulips, Wafer, Divers
     }
 }

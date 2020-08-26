@@ -6,6 +6,18 @@
 
 <h1>Cookies</h1>
 
+<form  method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" 
+                   asp-for="SearchTerm"/>
+            <span class="btn-sm">
+                <button class="btn btn-outline-secondary">Search</button>
+            </span>
+        </div>
+    </div>
+</form>
+
 <table class="table">
     @foreach (var cookie in Model.Cookies)
     {
@@ -13,6 +25,20 @@
         <td>@cookie.Name</td>
         <td>@cookie.Type</td>
         <td>@cookie.Diameter cm</td>
+        <td>
+            <a class="btn btn-sm"
+               asp-page="./Detail"
+               asp-route-cookieId="@cookie.Id">
+                Search
+            </a>
+            <a class="btn btn-sm"
+               asp-page="./Edit"
+               asp-route-cookieId="@cookie.Id">
+                Edit
+            </a>
+        </td>
     </tr>
     }
 </table>
+
+<a asp-page=".\Edit" class="btn btn-primary">Add new</a>

@@ -15,6 +15,9 @@ namespace OlavWebsite.Pages
 
         public IEnumerable<Cookie> Cookies{ get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
+
         public CookiesModel(ICookieData cookieData)
         {
             _cookieData = cookieData;
@@ -22,7 +25,7 @@ namespace OlavWebsite.Pages
 
         public void OnGet()
         {
-            Cookies = _cookieData.GetAllCookies();
+            Cookies = _cookieData.GetCookiesByName(SearchTerm);
         }
     }
 }

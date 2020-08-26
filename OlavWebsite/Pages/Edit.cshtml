@@ -1,0 +1,27 @@
+﻿@page "{cookieId:int?}"
+@model OlavWebsite.Pages.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editing @Model.Cookie.Name</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Cookie.Id" />
+    <div class="form-group">
+        <label asp-for="Cookie.Name"></label>
+        <input asp-for="Cookie.Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="Cookie.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Cookie.Diameter"></label>
+        <input asp-for="Cookie.Diameter" class="form-control" />
+        <span class="text-danger" asp-validation-for="Cookie.Diameter"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Cookie.Type"></label>
+        <select class="form-control" asp-for="Cookie.Type" asp-items="Model.CookieTypes"></select>
+        <span class="text-danger" asp-validation-for="Cookie.Type"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
