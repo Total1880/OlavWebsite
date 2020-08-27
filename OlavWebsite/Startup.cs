@@ -30,7 +30,7 @@ namespace OlavWebsite
                 options.UseSqlServer(Configuration.GetConnectionString("OlavWebsiteDb"));
             });
 
-            services.AddSingleton<ICookieData, InMemoryCookieData>();
+            services.AddScoped<ICookieData, SqlCookieData>();
 
             services.AddRazorPages();
         }

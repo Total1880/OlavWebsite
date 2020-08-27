@@ -1,0 +1,30 @@
+﻿@page
+@model OlavWebsite.Pages.CookiesModel
+@{
+    ViewData["Title"] = "Cookies";
+}
+
+<h1>Cookies</h1>
+
+<form  method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" 
+                   asp-for="SearchTerm"/>
+            <span class="btn-sm">
+                <button class="btn btn-outline-secondary">Search</button>
+            </span>
+        </div>
+    </div>
+</form>
+
+@foreach (var cookie in Model.Cookies)
+{
+    <partial name="_Summary" model="cookie"/>
+}
+
+<a asp-page=".\Edit" class="btn btn-primary">Add new</a>
+
+@section footer {
+    Allo from cookies to layout
+}
