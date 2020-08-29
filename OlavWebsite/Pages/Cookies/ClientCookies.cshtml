@@ -1,0 +1,48 @@
+﻿@page
+@model OlavWebsite.Pages.Cookies.ClientCookieModel
+@{
+    ViewData["Title"] = "ClientCookies";
+}
+
+<h1>ClientCookie</h1>
+
+<table class="table table" id="cookies">
+</table>
+
+@section Scripts {
+    <environment include="Development">
+        <script src="~/node_modules/datatables.net/js/jquery.dataTables.js"></script>
+
+        <script src="~/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+        <link href="~/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.css" />
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+    </environment>
+
+
+    <script>
+
+        $(function () {
+
+            var types = ["None", "Cone", "Tulips", "Wafer", "Divers"]
+
+            $.ajax("/api/cookies/", { method: "get" })
+                .then(function (response) {
+                    $("#cookies").dataTable({
+                        data: response,
+                        columns: [
+                            { "data": "name" },
+                            { "data": "diameter" },
+                            { "data": "type", "render": function (data) { return types[data] } }
+                        ]
+                    });
+
+
+                });
+        });
+
+    </script>
+}
