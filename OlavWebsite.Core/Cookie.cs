@@ -2,7 +2,7 @@
 
 namespace OlavWebsite.Core
 {
-    public class Cookie
+   for  public class Cookie
     {
         public int Id { get; set; }
         [Required, StringLength(80)]
